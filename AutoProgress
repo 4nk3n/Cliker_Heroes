@@ -1,0 +1,152 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Hotkey permettant de mettre les scripts en pause. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Pause::Pause
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Fonction Cliquer aux cordonnées X,Y et attendre 50ms. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Cliquer(X,Y){
+mousemove, X, Y
+Sleep 50
+Click
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Script pour cliquer comme un ouf. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+F8::
+IfWinActive, Clicker Heroes
+loop {
+	if getkeystate("F8", "T") {
+		Click
+		Sleep 50
+	}
+}
+Return
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Script de montée en niveau. ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+F9::
+; Initialisation des variables.
+Indice := 0
+skill := 0
+
+
+While GetKeyState("F9", "T"){ ; Le script tourne tant que F9 n'a pas été réappuyé
+	
+	; Boucle pour cliquer 130 fois
+	mousemove, 845, 430
+	Loop 130 {
+		Click
+		Sleep 50
+	}
+	
+	; Partie pour évoluer le dernier Héro
+	Loop 4 {
+		send {Wheelup}
+		Sleep 50
+	}
+	Loop 12 {
+		send {Wheeldown}
+		Sleep 50
+	}
+
+	Cliquer(300,580)
+
+	
+	Send {Z down}
+	Cliquer(100,385)
+	Send {Z up}
+
+	Cliquer(580,367)
+	Cliquer(925,132)
+
+	Indice := Indice + 1
+
+
+	if (Indice = 4){
+
+		Indice := 0
+		skill := skill + 1
+		Loop 16 {
+			send {Wheelup}
+		}
+		Sleep 50
+
+		Send {Z down}
+		Cliquer(100,240)
+		Cliquer(100,315)
+		Cliquer(100,375)
+		sleep 50
+		Send {Z up}
+		send {Wheeldown}
+
+		Loop 14 {
+			mousemove, 850, 385
+			Loop 40 {
+				click
+				Sleep 50 ;  milliseconds
+			}
+			
+			Send {Z down}
+			mousemove, 100, 240
+			Sleep 100 ;  milliseconds
+			click
+			Sleep 50 ;  milliseconds
+			mousemove, 100, 315
+			Sleep 100 ;  milliseconds
+			click
+			Sleep 50 ;  milliseconds
+			mousemove, 100, 375
+			Sleep 100 ;  milliseconds
+			click
+			Sleep 50 ;  milliseconds
+			Send {Z up}
+			send {Wheeldown}
+			Sleep 50 ;  milliseconds
+		}
+
+
+		Cliquer(580,367)
+		Cliquer(925,132)
+
+		PixelGetColor, color, 1120, 278
+		if (color="0x0000FF") {
+			Cliquer(1120,278)
+		}
+
+		if (skill = 2){
+			send {1}
+			send {2}
+			send {6}
+			send {9}
+		}
+
+		if (skill = 6){
+			send {1}
+			send {2}
+			send {6}
+			send {9}
+			send {4}
+			send {3}
+		}
+
+		if (skill = 12){
+			send {1}
+			send {2}
+			send {6}
+			send {9}
+			send {4}
+			send {5}
+			send {7}
+			send {8}
+			send {3}
+			skill := 0
+		}
+	}
+}
+Return
+
+
